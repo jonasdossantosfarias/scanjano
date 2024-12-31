@@ -4,22 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário de Humor</title>
-    <link rel="stylesheet" href="css/calhumor.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script defer src="js/calhumor.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+            overflow-x: hidden;
+        }
 
+        .input-dialog {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .input-dialog h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1d72b8;
+        }
+
+        .input-dialog input[type="date"],
+        .input-dialog select,
+        .input-dialog input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            background-color: #f1f9ff;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-dialog input:focus,
+        .input-dialog select:focus {
+            border-color: #6fb1fc;
+            outline: none;
+        }
+
+        #content-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #animo-chart-container, #chart-container {
+            width: 30%;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        #animo-chart-container:hover, #chart-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #animoChart, #moodChart {
+            width: 100%;
+            height: 100%; 
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #calendar-container {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+            min-height: 350px;
+            margin-bottom: 20px;
+        }
+
+        #calendar-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #month-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        #month-navigation button {
+            background-color: #1d72b8;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #month-navigation button:hover {
+            background-color: #155a8a;
+        }
+
+        #current-month {
+            font-size: 1em;
+            font-weight: bold;
+            color: #1d72b8;
+        }
+
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        .day {
+            border-radius: 12px;
+            background: #f4f6f8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+            padding: 5px;
+        }
+
+        .day:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .emoji {
+            margin-top: 2px;
+        }
+
+        .emoji img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div id="full-image-container" onclick="closeFullImage()">
-        <img id="full-image" src="" alt="Imagem ampliada">
-    </div>
-
     <div id="content-container">
         <div id="animo-chart-container">
             <h3 style="text-align: center; color: #1d72b8;">Progresso de Ânimo</h3>
@@ -39,7 +211,7 @@
             <h3 style="text-align: center; color: #1d72b8;">Humores do Mês</h3>
             <canvas id="moodChart" style="max-width: 90%; height: 100px;"></canvas>
         </div>
-    </div>              
+    </div>
 
     <div id="input-dialog" class="input-dialog">
         <h3 style="font-size: 1.2em; font-weight: 700; color: #1d72b8;">Registrar Humor do Dia</h3>
@@ -47,7 +219,7 @@
             <label for="dialog-date-display" style="display: block; font-size: 0.9em; color: #333;">Data:</label>
             <div id="dialog-date-display" style="padding: 8px; width: 100%; border: 1px solid #ccc; border-radius: 6px; background-color: #f9f9f9;">dd/mm/aaaa</div>
         </div>
-        
+
         <div class="input-group" style="margin-bottom: 15px;">
             <label for="dialog-mood-select" style="display: block; font-size: 0.9em; color: #333;">Humor:</label>
             <select id="dialog-mood-select" style="padding: 8px; width: 100%; border: 1px solid #ccc; border-radius: 6px;">
@@ -105,5 +277,64 @@
             <button onclick="closeInputDialog()" style="background-color: #9e9e9e; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">Cancelar</button>
         </div>
     </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
+            authDomain: "calhumorjano.firebaseapp.com",
+            projectId: "calhumorjano",
+            storageBucket: "calhumorjano.appspot.com",
+            messagingSenderId: "920817014794",
+            appId: "1:920817014794:web:cce90cfd082a022621e7f3",
+            measurementId: "G-2GKTHK0RMP"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        let moodData = {};
+
+        async function refreshMoodData() {
+            if (!auth.currentUser) {
+                console.error('Usuário não está autenticado.');
+                return;
+            }
+
+            const userId = auth.currentUser.uid;
+            const humorCollectionRef = db.collection('pacientes').doc(userId).collection('humor');
+
+            try {
+                const snapshot = await humorCollectionRef.get();
+                moodData = {};
+                snapshot.forEach(doc => {
+                    moodData[doc.id] = doc.data();
+                });
+            } catch (error) {
+                console.error('Erro ao carregar registros de humor do Firestore:', error);
+            }
+        }
+
+        function updateCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.classList.add('day');
+                day.textContent = i;
+                calendar.appendChild(day);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCalendar();
+        });
+    </script>
 </body>
 </html>
