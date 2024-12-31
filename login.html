@@ -1,112 +1,155 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de Usuário</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9fafb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+<html><head><base href="." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login de Usuário</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f9fafb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        margin: 0;
+    }
+    #login-container {
+        background: #ffffff;
+        border-radius: 50%;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        width: 380px;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    #logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #1d72b8;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+        margin-bottom: 15px;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    h2 {
+        color: #1d72b8;
+        margin: 10px 0;
+        font-size: 1.5em;
+    }
+    .input-field {
+        width: 85%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 25px;
+        border: 2px solid #ddd;
+        font-size: 0.9em;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+    .input-field:focus {
+        border-color: #1d72b8;
+        box-shadow: 0 0 0 2px rgba(29, 114, 184, 0.2);
+    }
+    .button-container {
+        margin-top: 15px;
+        width: 85%;
+    }
+    .button-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1d72b8;
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+    .button-container button:hover {
+        background-color: #155a8a;
+        transform: translateY(-2px);
+    }
+    #message {
+        margin-top: 10px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .link {
+        color: #1d72b8;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.8em;
+        transition: all 0.3s ease;
+    }
+    .link:hover {
+        color: #155a8a;
+        text-decoration: underline;
+    }
+    .password-container {
+        position: relative;
+        width: 85%;
+    }
+    .password-container i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #1d72b8;
+    }
+    @media (max-width: 480px) {
+        #login-container {
+            width: 300px;
+            height: 300px;
             padding: 20px;
         }
-        #login-container {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
         #logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            object-fit: cover;
-            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
         }
         h2 {
-            color: #1d72b8;
-            margin-bottom: 20px;
+            font-size: 1.2em;
         }
         .input-field {
-            width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1em;
         }
-        .button-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-        }
-        .button-container button {
-            padding: 10px 20px;
-            background-color: #1d72b8;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1em;
-        }
-        .button-container button:hover {
-            background-color: #155a8a;
-        }
-        #message {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .link {
-            color: #1d72b8;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .link:hover {
-            color: #155a8a;
-        }
-        @media (max-width: 768px) {
-            #login-container {
-                padding: 20px;
-                max-width: 100%;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
-            .button-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div id="login-container">
         <img id="logo" src="imagens/jano_logo.png" alt="Logo">
         <h2>Login de Usuário</h2>
         <input type="email" class="input-field" id="email" placeholder="E-mail">
-        <div style="position: relative;">
+        <div class="password-container">
             <input type="password" class="input-field" id="password" placeholder="Senha">
-            <i class="bi bi-eye-fill icon" id="btn-senha" onclick="mostrarSenha()" style="cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
+            <i class="bi bi-eye-fill icon" id="btn-senha" onclick="mostrarSenha()"></i>
         </div>
-        <a href="#" onclick="resetPassword()" class="link">Recuperar Senha</a>
+        <a href="javascript:void(0)" onclick="resetPassword()" class="link">Recuperar Senha</a>
         <div class="button-container">
             <button onclick="loginUser()">Entrar</button>
         </div>
         <p id="message"></p>
-        <p>Não tenho cadastro? <a href="index.html" class="link">Cadastre-se aqui</a></p>
+        <p style="font-size: 0.8em;">Não tenho cadastro? <a href="index.html" class="link">Cadastre-se aqui</a></p>
     </div>
 
     <!-- Firebase SDK -->
@@ -142,7 +185,6 @@
             }
 
             try {
-                // Login no Firebase Auth
                 await auth.signInWithEmailAndPassword(email, password);
                 messageElement.textContent = 'Login bem-sucedido!';
                 messageElement.style.color = 'green';
@@ -157,7 +199,6 @@
             }
         }
 
-        // Função para mostrar ou esconder a senha
         function mostrarSenha() {
             const inputPass = document.getElementById('password');
             const btnShowPass = document.getElementById('btn-senha');
@@ -170,7 +211,6 @@
             }
         }
 
-        // Função para resetar senha
         function resetPassword() {
             const email = document.getElementById('email').value;
             const messageElement = document.getElementById('message');
@@ -190,5 +230,4 @@
             });
         }
     </script>
-</body>
-</html>
+</body></html>
