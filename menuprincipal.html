@@ -1,3 +1,4 @@
+<html><head><base href="/">
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,36 +20,47 @@
         /* Perfil */
         #profile-container {
             display: flex;
-            flex-direction: row; /* Alinha a foto e o nome em linha */
-            align-items: center; /* Centraliza verticalmente */
-            justify-content: center; /* Centraliza horizontalmente */
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
             background-color: #1d72b8;
             padding: 20px;
             color: white;
             border-bottom: 4px solid #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
 
         #profile-container img {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 2px solid white;
+            border: 3px solid white;
             object-fit: cover;
-            margin-right: 15px; /* Espaço entre imagem e nome */
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        #profile-container img:hover {
+            transform: scale(1.05);
         }
 
         #profile-container span {
-            font-size: 1.2em;
+            font-size: 1.3em;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* Menu */
+        /* Menu Moderno */
         #menu {
-            width: 100%; /* O menu ocupa toda a largura */
+            width: 100%;
             background-color: #ffffff;
             display: flex;
             justify-content: space-around;
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         #menu a {
@@ -57,22 +69,58 @@
             align-items: center;
             text-decoration: none;
             color: #1d72b8;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #menu a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(29, 114, 184, 0.1);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        #menu a:hover:before {
+            transform: translateY(0);
         }
 
         #menu a:hover {
-            color: #155a8a;
             transform: translateY(-5px);
+            color: #003f5c;
         }
 
         #menu a.active {
-            color: #ff007f;
+            background: linear-gradient(145deg, #1d72b8, #003f5c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(29, 114, 184, 0.3);
         }
 
         #menu a i {
             font-size: 1.8em;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        #menu a:hover i {
+            transform: scale(1.2);
+        }
+
+        #menu a span {
+            font-size: 0.9em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Conteúdo Dinâmico */
@@ -82,35 +130,64 @@
             text-align: center;
         }
 
-        /* Iframe para o Calendário e Scan Estress */
         #iframe-container {
             width: 100%;
-            height: calc(100vh - 170px); /* Altura calculada para preencher a tela menos o espaço necessário */
-            display: none; /* Inicialmente escondido */
+            height: calc(100vh - 170px);
+            display: none;
             border: none;
         }
 
-        /* Responsividade */
+        /* Responsividade Aprimorada */
         @media (max-width: 768px) {
+            #profile-container {
+                padding: 15px;
+            }
+
             #profile-container img {
                 width: 60px;
                 height: 60px;
             }
 
             #profile-container span {
-                font-size: 1em;
+                font-size: 1.1em;
+            }
+
+            #menu {
+                padding: 10px 0;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            #menu a {
+                padding: 8px 12px;
+                margin: 5px;
+                flex: 0 1 calc(20% - 10px);
+                min-width: 60px;
             }
 
             #menu a i {
-                font-size: 1.5em;
+                font-size: 1.4em;
+                margin-bottom: 4px;
             }
 
             #menu a span {
-                font-size: 0.9em;
+                font-size: 0.7em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #menu a {
+                flex: 0 1 calc(33.33% - 10px);
+                margin: 5px;
+            }
+
+            #menu {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             #iframe-container {
-                height: calc(100vh - 150px); /* Ajusta altura para telas menores */
+                height: calc(100vh - 150px);
             }
         }
     </style>
@@ -144,7 +221,7 @@
         </a>
         <a href="#" id="notifications-link" onclick="navigateTo('notifications')">
             <i class="bi bi-bell-fill"></i>
-            <span>Notificações</span>
+            <span>Exercicio</span>
         </a>
         <a href="#" id="profile-link" onclick="navigateTo('profile')">
             <i class="bi bi-person-fill"></i>
