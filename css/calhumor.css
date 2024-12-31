@@ -1,155 +1,130 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #f0f4f8, #ffffff);
-    margin: 0;
-    padding: 0;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+// Seletores principais
+const calendar = document.getElementById('calendar');
+const currentMonthLabel = document.getElementById('current-month');
+const inputDialog = document.getElementById('input-dialog');
+const dialogDateDisplay = document.getElementById('dialog-date-display');
+const dialogMoodSelect = document.getElementById('dialog-mood-select');
+const dialogNote = document.getElementById('dialog-note');
+const firebaseConfig = {
+    apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
+    authDomain: "calhumorjano.firebaseapp.com",
+    projectId: "calhumorjano",
+    storageBucket: "calhumorjano.appspot.com",
+    messagingSenderId: "920817014794",
+    appId: "1:920817014794:web:cce90cfd082a022621e7f3",
+    measurementId: "G-2GKTHK0RMP"
+};
+
+// Inicialização Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
 }
 
-.input-dialog {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 90%;
-    padding: 20px;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-.input-dialog h3 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: #0077cc;
-}
+let currentDate = new Date();
+let moodData = {}; // Dados de humor por dia
 
-.input-dialog input,
-.input-dialog select {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9fbfd;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
+// Atualiza o calendário
+function updateCalendar() {
+    calendar.innerHTML = '';
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
 
-.input-dialog input:focus,
-.input-dialog select:focus {
-    border-color: #0077cc;
-    outline: none;
-}
+    currentMonthLabel.innerText = currentDate.toLocaleDateString('pt-BR', {
+        month: 'long', year: 'numeric'
+    });
 
-#content-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-}
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-#animo-chart-container, #chart-container, #calendar-container {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 350px;
-}
-
-#animo-chart-container:hover, #chart-container:hover, #calendar-container:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
-    width: 100%;
-    background: #f9fbfd;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
-}
-
-.day {
-    background: #ffffff;
-    border: 1px solid #e0e6ed;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.day:hover {
-    background: #f1faff;
-    transform: translateY(-3px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.emoji img {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 0.5rem;
-}
-
-.button-container button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background: linear-gradient(45deg, #0077cc, #00aaff);
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.button-container button:hover {
-    background: linear-gradient(45deg, #005fa3, #008bcc);
-}
-
-@media (max-width: 768px) {
-    #content-container {
-        grid-template-columns: 1fr;
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyDay = document.createElement('div');
+        calendar.appendChild(emptyDay);
     }
 
-    #calendar {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.classList.add('day');
+        const dayString = `${year}-${(month + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+        day.dataset.date = dayString;
+        day.innerHTML = `<div class="date-label">${i}</div>`;
 
-    .day {
-        padding: 5px;
-    }
+        if (moodData[dayString]) {
+            const mood = moodData[dayString].mood;
+            day.innerHTML += `<div class="emoji"><img src="imagens/emojis/${mood.toLowerCase()}.png" alt="${mood}"></div>`;
+        }
 
-    .emoji img {
-        width: 24px;
-        height: 24px;
+        day.addEventListener('click', () => openInputDialog(dayString));
+        calendar.appendChild(day);
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
+// Altera o mês
+function changeMonth(direction) {
+    currentDate.setMonth(currentDate.getMonth() + direction);
+    updateCalendar();
+}
+
+// Abre o diálogo para registro de humor
+function openInputDialog(date) {
+    dialogDateDisplay.textContent = date.split('-').reverse().join('/');
+    if (moodData[date]) {
+        dialogMoodSelect.value = moodData[date].mood;
+        dialogNote.value = moodData[date].note;
+    } else {
+        dialogMoodSelect.value = 'feliz';
+        dialogNote.value = '';
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
+    inputDialog.style.display = 'block';
+}
+
+// Fecha o diálogo
+function closeInputDialog() {
+    inputDialog.style.display = 'none';
+}
+
+// Salva o humor no Firebase
+async function saveMood() {
+    const date = dialogDateDisplay.textContent.split('/').reverse().join('-');
+    const mood = dialogMoodSelect.value;
+    const note = dialogNote.value;
+
+    try {
+        const userId = auth.currentUser.uid;
+        await db.collection('pacientes').doc(userId).collection('humor').doc(date).set({
+            mood, note, date
+        });
+        moodData[date] = { mood, note };
+        closeInputDialog();
+        updateCalendar();
+    } catch (error) {
+        console.error('Erro ao salvar o humor:', error);
     }
 }
+
+// Carrega os dados de humor do Firebase
+async function refreshMoodData() {
+    try {
+        const userId = auth.currentUser.uid;
+        const snapshot = await db.collection('pacientes').doc(userId).collection('humor').get();
+        snapshot.forEach(doc => {
+            moodData[doc.id] = doc.data();
+        });
+        updateCalendar();
+    } catch (error) {
+        console.error('Erro ao carregar dados de humor:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            refreshMoodData();
+        } else {
+            console.log('Usuário não autenticado.');
+        }
+    });
+    updateCalendar();
+});
