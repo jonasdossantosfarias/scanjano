@@ -194,7 +194,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
-    <script>
+   <script>
         // Configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
@@ -223,6 +223,7 @@
             }
 
             try {
+                // Login no Firebase Auth
                 await auth.signInWithEmailAndPassword(email, password);
                 messageElement.textContent = 'Login bem-sucedido!';
                 messageElement.style.color = 'green';
