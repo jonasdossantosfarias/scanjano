@@ -47,14 +47,13 @@ body {
 
 #content-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column; /* Altere para coluna */
+    align-items: center;    /* Centralize os itens horizontalmente */
+    gap: 20px;              /* Adicione espaçamento entre os elementos */
     width: 100%;
     max-width: 1200px;
-    gap: 20px;
-    flex-wrap: wrap; 
 }
+
 
 #animo-chart-container, #chart-container {
     width: 30%;
