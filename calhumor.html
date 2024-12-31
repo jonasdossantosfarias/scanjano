@@ -14,26 +14,26 @@
     <script defer src="js/calhumor.js"></script>
 </head>
 <body>
-    <div id="content-container">
-        <div id="animo-chart-container">
-            <h3>Progresso de Ânimo</h3>
-            <canvas id="animoChart"></canvas>
+   <div id="content-container">
+    <div id="calendar-container">
+        <div id="month-navigation">
+            <button onclick="changeMonth(-1)">&#8249;</button>
+            <div id="current-month"></div>
+            <button onclick="changeMonth(1)">&#8250;</button>
         </div>
-
-        <div id="calendar-container">
-            <div id="month-navigation">
-                <button onclick="changeMonth(-1)">&#8249;</button>
-                <div id="current-month"></div>
-                <button onclick="changeMonth(1)">&#8250;</button>
-            </div>
-            <div id="calendar"></div>
-        </div>
-
-        <div id="chart-container">
-            <h3>Humores do Mês</h3>
-            <canvas id="moodChart"></canvas>
-        </div>
+        <div id="calendar"></div>
     </div>
+
+    <div id="animo-chart-container">
+        <h3 style="text-align: center; color: #1d72b8;">Progresso de Ânimo</h3>
+        <canvas id="animoChart" style="max-width: 90%; height: 100%;"></canvas>
+    </div>
+
+    <div id="chart-container">
+        <h3 style="text-align: center; color: #1d72b8;">Humores do Mês</h3>
+        <canvas id="moodChart" style="max-width: 90%; height: 100px;"></canvas>
+    </div>
+</div>
 
     <div id="input-dialog" class="input-dialog">
         <h3>Registrar Humor do Dia</h3>
