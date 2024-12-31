@@ -51,28 +51,47 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+       /* Estilo moderno para o menu com tons de azul e texto branco */
         #menu a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #1d72b8;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
+            background-color: #1d72b8; /* Tom de azul inicial */
+            color: white; /* Texto branco */
+            padding: 10px 15px;
+            border-radius: 5px; /* Borda arredondada para um design moderno */
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+        /* Estilo hover para transição suave */
         #menu a:hover {
-            color: #155a8a;
-            transform: translateY(-5px);
+            background-color: #155a8a; /* Tom de azul mais escuro no hover */
+            transform: scale(1.1); /* Leve aumento no tamanho */
         }
-
+        
+        /* Estilo ativo para destacar a seção atual */
         #menu a.active {
-            color: #ff007f;
+            background-color: #003f5c; /* Tom de azul mais profundo */
+            font-weight: bold;
         }
 
         #menu a i {
             font-size: 1.8em;
             margin-bottom: 5px;
+        }
+
+        /* Tons diferentes de azul para cada item */
+        #home-link {
+            background-color: #1e88e5;
+        }
+        #search-link {
+            background-color: #42a5f5;
+        }
+        #likes-link {
+            background-color: #64b5f6;
+        }
+        #notifications-link {
+            background-color: #90caf9;
+        }
+        #profile-link {
+            background-color: #bbdefb;
         }
 
         /* Conteúdo Dinâmico */
