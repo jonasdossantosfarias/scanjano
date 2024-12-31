@@ -1,0 +1,204 @@
+<html><head><base href="." />
+<title>Clean Modern Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: #155a8a;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.button {
+    background: linear-gradient(45deg, #2563eb, #155a8a);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.circle-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 0 auto 20px;
+    overflow: hidden;
+    background: linear-gradient(45deg, #2563eb, #155a8a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-image i {
+    font-size: 40px;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica de Ansiedade</h1>
+            <p>Técnicas para controlar a ansiedade</p>
+        </header>
+
+        <div class="grid">
+            <div class="card fade-in">
+                <div class="circle-image">
+                    <i class="bi bi-snow"></i>
+                </div>
+                <h2>Técnica de Segurar Gelo na Mão</h2>
+                <p>Método para interromper pensamentos ansiosos através da sensação do gelo.</p>
+                <button class="button">Saiba Mais</button>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.2s;">
+                <div class="circle-image">
+                    <i class="bi bi-eye"></i>
+                </div>
+                <h2>Técnica da Descrição de Sensações</h2>
+                <p>Observe e descreva detalhadamente as sensações do ambiente.</p>
+                <button class="button">Saiba Mais</button>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.4s;">
+                <div class="circle-image">
+                    <i class="bi bi-123"></i>
+                </div>
+                <h2>Técnica de Contagem Regressiva</h2>
+                <p>Conte regressivamente para acalmar a mente e focar no presente.</p>
+                <button class="button">Saiba Mais</button>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.6s;">
+                <div class="circle-image">
+                    <i class="bi bi-chat-heart"></i>
+                </div>
+                <h2>Técnica de Diálogo Positivo</h2>
+                <p>Pratique o diálogo interno positivo para reduzir a ansiedade.</p>
+                <button class="button">Saiba Mais</button>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.8s;">
+                <div class="circle-image">
+                    <i class="bi bi-wind"></i>
+                </div>
+                <h2>Técnica de Respiração 4X4X4</h2>
+                <p>Respire em ciclos de 4 segundos para acalmar corpo e mente.</p>
+                <button class="button">Saiba Mais</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseout', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    });
+    </script>
+</body>
+</html>
