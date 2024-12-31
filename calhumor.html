@@ -279,62 +279,380 @@
     </div>
 
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
-            authDomain: "calhumorjano.firebaseapp.com",
-            projectId: "calhumorjano",
-            storageBucket: "calhumorjano.appspot.com",
-            messagingSenderId: "920817014794",
-            appId: "1:920817014794:web:cce90cfd082a022621e7f3",
-            measurementId: "G-2GKTHK0RMP"
-        };
+        body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+    overflow-x: hidden;
+}
 
-        firebase.initializeApp(firebaseConfig);
+.input-dialog {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+}
 
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        const storage = firebase.storage();
+.input-dialog h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #1d72b8;
+}
 
-        let moodData = {};
+.input-dialog input[type="date"],
+.input-dialog select,
+.input-dialog input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background-color: #f1f9ff;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
 
-        async function refreshMoodData() {
-            if (!auth.currentUser) {
-                console.error('Usuário não está autenticado.');
-                return;
-            }
+.input-dialog input:focus,
+.input-dialog select:focus {
+    border-color: #6fb1fc;
+    outline: none;
+}
 
-            const userId = auth.currentUser.uid;
-            const humorCollectionRef = db.collection('pacientes').doc(userId).collection('humor');
+#content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
 
-            try {
-                const snapshot = await humorCollectionRef.get();
-                moodData = {};
-                snapshot.forEach(doc => {
-                    moodData[doc.id] = doc.data();
-                });
-            } catch (error) {
-                console.error('Erro ao carregar registros de humor do Firestore:', error);
-            }
-        }
+#animo-chart-container, #chart-container {
+    width: 30%;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 350px;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px; /* Para criar espaço entre os elementos ao quebrar linha */
+}
 
-        function updateCalendar() {
-            const calendar = document.getElementById('calendar');
-            calendar.innerHTML = '';
-            const year = new Date().getFullYear();
-            const month = new Date().getMonth();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
+#animo-chart-container:hover, #chart-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 
-            for (let i = 1; i <= daysInMonth; i++) {
-                const day = document.createElement('div');
-                day.classList.add('day');
-                day.textContent = i;
-                calendar.appendChild(day);
-            }
-        }
+#animoChart, #moodChart {
+    width: 100%; /* Ajusta o gráfico ao tamanho do container */
+    height: 100%; 
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        document.addEventListener('DOMContentLoaded', function () {
-            updateCalendar();
-        });
+.checklist-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.checklist-container label {
+    font-size: 1em;
+    color: #555;
+}
+
+.checklist-container input[type="radio"] {
+    margin-right: 8px;
+}
+
+#calendar-container {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    min-height: 350px;
+    margin-bottom: 20px;
+}
+
+#calendar-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#month-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#month-navigation button {
+    background-color: #1d72b8;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#month-navigation button:hover {
+    background-color: #155a8a;
+}
+
+#current-month {
+    font-size: 1em;
+    font-weight: bold;
+    color: #1d72b8;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+    max-width: 700px; /* Limita a largura máxima do calendário */
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.day {
+    border-radius: 12px;
+    background: #f4f6f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    height: 45px; /* Aumenta a altura para acomodar o emoji e o número do dia */
+    display: flex;
+    flex-direction: column; /* Alinha o número do dia acima do emoji */
+    align-items: center;
+    justify-content: space-between; /* Garante espaçamento adequado entre o número e o emoji */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    overflow: hidden; /* Evita que o conteúdo dentro do dia ultrapasse */
+    text-overflow: ellipsis; /* Adiciona elipses caso o texto seja muito longo */
+    position: relative;
+    padding: 5px;
+}
+
+.day:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.emoji {
+    margin-top: 2px;
+}
+
+.emoji img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px; /* Ajusta o espaçamento abaixo do emoji */
+}
+
+.mood-description {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.mood-description img.thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#full-image-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#full-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.mood-description, .input-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.show-description, .show-input {
+    display: block;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 5px 10px;
+    background-color: #1d72b8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.8em;
+}
+
+.button-container button:hover {
+    background-color: #155a8a;
+}
+
+audio {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Botões de gravação */
+.audio-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.audio-controls button {
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff5252;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.audio-controls button:hover {
+    background-color: #d32f2f;
+}
+
+.audio-controls button.stop {
+    background-color: #4caf50;
+}
+
+.audio-controls button.stop:hover {
+    background-color: #388e3c;
+}
+
+.audio-controls button.delete {
+    background-color: #9e9e9e;
+}
+
+.audio-controls button.delete:hover {
+    background-color: #616161;
+}
+
+.save-cancel-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.save-cancel-container button {
+    width: 45%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Botão de salvar com gradiente */
+.save-cancel-container button.save {
+    background: linear-gradient(to right, #6fb1fc, #1d72b8);
+    color: white;
+}
+
+.save-cancel-container button.save:hover {
+    background: linear-gradient(to right, #1d72b8, #6fb1fc);
+}
+
+/* Botão de cancelar */
+.save-cancel-container button.cancel {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+.save-cancel-container button.cancel:hover {
+    background-color: #616161;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    #content-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #animo-chart-container, #chart-container, #calendar-container {
+        width: 90%; /* Ajusta para ocupar mais espaço em telas menores */
+    }
+}
+
     </script>
 </body>
 </html>
