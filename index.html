@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #register-container {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #1d72b8;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #1d72b8;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .button-container button:hover {
+            background-color: #155a8a;
+        }
+        .photo-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        #profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+        #photo-upload-label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #1d72b8;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+        }
+        #photo-upload {
+            display: none;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            #register-container {
+                padding: 20px;
+                max-width: 100%;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            #profile-photo {
+                width: 80px;
+                height: 80px;
+            }
+            #photo-upload-label {
+                width: 25px;
+                height: 25px;
+            }
+            .input-field {
+                font-size: 0.9em;
+            }
+            .button-container button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="register-container">
+        <h2>Cadastro de Usuário</h2>
+        <div class="photo-container">
+            <img id="profile-photo" src="https://via.placeholder.com/120" alt="Foto do perfil">
+            <label for="photo-upload" id="photo-upload-label" title="Escolher ou tirar foto">
+                <i class="bi bi-camera"></i>
+            </label>
+            <input type="file" id="photo-upload" accept="image/*" onchange="loadPhoto(event)">
+        </div>
+        <input type="text" class="input-field" id="full-name" placeholder="Nome Completo">
+        <input type="email" class="input-field" id="email" placeholder="E-mail">
+        <input type="tel" class="input-field" id="phone-number" placeholder="Número de Telefone">
+        <div style="position: relative;">
+            <input type="password" class="input-field" id="password" placeholder="Senha">
+            <i class="bi bi-eye-fill icon" id="btn-senha" onclick="mostrarSenha()" style="cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
+        </div>
+        <div class="button-container">
+            <button onclick="registerUser()">Registrar</button>
+        </div>
+        <p>Já tem cadastro? <a href="login.html" class="link">Faça login aqui</a></p>
+        <p id="message"></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
+            authDomain: "calhumorjano.firebaseapp.com",
+            projectId: "calhumorjano",
+            storageBucket: "calhumorjano.appspot.com",
+            messagingSenderId: "920817014794",
+            appId: "1:920817014794:web:cce90cfd082a022621e7f3",
+            measurementId: "G-2GKTHK0RMP"
+        };
+
+        // Inicializa o Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // Função para registrar usuário no Firebase
+        async function registerUser() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const password = document.getElementById('password').value;
+            const photoFile = document.getElementById('photo-upload').files[0];
+            const messageElement = document.getElementById('message');
+
+            if (!fullName || !email || !phoneNumber || !password || !photoFile) {
+                messageElement.textContent = 'Por favor, preencha todos os campos.';
+                messageElement.style.color = 'red';
+                return;
+            }
+
+            try {
+                // Registrar no Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // Upload da imagem para o Firebase Storage
+                const storageRef = storage.ref().child('profile_photos/' + user.uid);
+                const uploadTask = storageRef.put(photoFile);
+
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        // Acompanhar o progresso do upload
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Progresso do upload: ' + progress + '%');
+                    },
+                    (error) => {
+                        // Tratar erros no upload
+                        console.log('Erro no upload:', error);
+                        messageElement.textContent = 'Erro no upload da imagem.';
+                        messageElement.style.color = 'red';
+                    },
+                    async () => {
+                        // Quando o upload estiver concluído, obter a URL da imagem
+                        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+
+                        // Salvar informações no Firestore com o ID do usuário (uid)
+                        await db.collection('pacientes').doc(user.uid).set({
+                            Nome: fullName,
+                            email: email,
+                            telefone: phoneNumber,
+                            foto_perfil: downloadURL,
+                            uid: user.uid
+                        });
+
+                        messageElement.textContent = 'Registro completo!';
+                        messageElement.style.color = 'green';
+
+                        // Redirecionar após o sucesso
+                        setTimeout(() => {
+                            window.location.href = 'menuprincipal.html';
+                        }, 2000); // Redireciona após 2 segundos
+                    }
+                );
+            } catch (error) {
+                messageElement.textContent = 'Erro: ' + error.message;
+                messageElement.style.color = 'red';
+            }
+        }
+
+        // Função para mostrar ou esconder a senha
+        function mostrarSenha() {
+            const inputPass = document.getElementById('password');
+            const btnShowPass = document.getElementById('btn-senha');
+            if (inputPass.type === 'password') {
+                inputPass.setAttribute('type', 'text');
+                btnShowPass.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
+            } else {
+                inputPass.setAttribute('type', 'password');
+                btnShowPass.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
+            }
+        }
+
+        // Carregar foto de perfil
+        function loadPhoto(event) {
+            const photo = document.getElementById('profile-photo');
+            photo.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>

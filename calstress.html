@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Cardíaco Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/calstress.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                <h2 id="currentMonth">Dezembro 2023</h2>
+                <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar" id="calendar"></div>
+        </div>
+        <div id="stress-chart-container">
+            <h4 style="font-size: 1em; font-weight: 600; color: #1d72b8;">Nível de Estresse</h4>
+            <canvas id="stressChart"></canvas>
+        </div>        
+    </div>
+
+    <div class="dialog-overlay" id="monitorDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <h2>Monitor Cardíaco - <span id="selectedDate"></span></h2>
+                <button class="close-dialog" id="closeDialog"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="header">
+                <h1>Monitor Cardíaco Digital</h1>
+                <p id="status">Aguardando início da medição...</p>
+            </div>
+            <div class="video-container">
+                <video id="video" playsinline></video>
+            </div>
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-value" id="bpm">--</div>
+                    <div class="metric-label">BPM</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="confidence">0%</div>
+                    <div class="metric-label">Confiança</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="timer">60s</div>
+                    <div class="metric-label">Tempo Restante</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="timer">60s</div>
+                    <div class="metric-label">Tempo Restante</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="startButton"><i class="fas fa-play"></i>Iniciar</button>
+                <button id="stopButton" disabled><i class="fas fa-stop"></i>Parar</button>
+                <button id="saveReading" disabled><i class="fas fa-save"></i>Salvar</button>
+            </div>
+            
+            <canvas id="canvas"></canvas>
+            <div id="finalResult"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/calstress.js"></script>
+</body>
+</html>

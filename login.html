@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de Usuário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #login-container {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        #logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #1d72b8;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #1d72b8;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+        .button-container button:hover {
+            background-color: #155a8a;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .link {
+            color: #1d72b8;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .link:hover {
+            color: #155a8a;
+        }
+        @media (max-width: 768px) {
+            #login-container {
+                padding: 20px;
+                max-width: 100%;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <img id="logo" src="imagens/jano_logo.png" alt="Logo">
+        <h2>Login de Usuário</h2>
+        <input type="email" class="input-field" id="email" placeholder="E-mail">
+        <div style="position: relative;">
+            <input type="password" class="input-field" id="password" placeholder="Senha">
+            <i class="bi bi-eye-fill icon" id="btn-senha" onclick="mostrarSenha()" style="cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
+        </div>
+        <a href="#" onclick="resetPassword()" class="link">Recuperar Senha</a>
+        <div class="button-container">
+            <button onclick="loginUser()">Entrar</button>
+        </div>
+        <p id="message"></p>
+        <p>Não tenho cadastro? <a href="index.html" class="link">Cadastre-se aqui</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <script>
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
+            authDomain: "calhumorjano.firebaseapp.com",
+            projectId: "calhumorjano",
+            storageBucket: "calhumorjano.appspot.com",
+            messagingSenderId: "920817014794",
+            appId: "1:920817014794:web:cce90cfd082a022621e7f3",
+            measurementId: "G-2GKTHK0RMP"
+        };
+
+        // Inicializa o Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Função para autenticar o usuário
+        async function loginUser() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('message');
+
+            if (!email || !password) {
+                messageElement.textContent = 'Por favor, preencha todos os campos.';
+                messageElement.style.color = 'red';
+                return;
+            }
+
+            try {
+                // Login no Firebase Auth
+                await auth.signInWithEmailAndPassword(email, password);
+                messageElement.textContent = 'Login bem-sucedido!';
+                messageElement.style.color = 'green';
+                window.location.href = 'menuprincipal.html';
+            } catch (error) {
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    messageElement.textContent = 'E-mail ou senha não cadastrados.';
+                } else {
+                    messageElement.textContent = 'Erro: ' + error.message;
+                }
+                messageElement.style.color = 'red';
+            }
+        }
+
+        // Função para mostrar ou esconder a senha
+        function mostrarSenha() {
+            const inputPass = document.getElementById('password');
+            const btnShowPass = document.getElementById('btn-senha');
+            if (inputPass.type === 'password') {
+                inputPass.setAttribute('type', 'text');
+                btnShowPass.classList.replace('bi-eye-fill', 'bi-eye-slash-fill');
+            } else {
+                inputPass.setAttribute('type', 'password');
+                btnShowPass.classList.replace('bi-eye-slash-fill', 'bi-eye-fill');
+            }
+        }
+
+        // Função para resetar senha
+        function resetPassword() {
+            const email = document.getElementById('email').value;
+            const messageElement = document.getElementById('message');
+
+            if (!email) {
+                messageElement.textContent = 'Por favor, insira o e-mail para recuperar a senha.';
+                messageElement.style.color = 'red';
+                return;
+            }
+
+            auth.sendPasswordResetEmail(email).then(() => {
+                messageElement.textContent = 'E-mail para redefinição de senha enviado!';
+                messageElement.style.color = 'green';
+            }).catch((error) => {
+                messageElement.textContent = 'Erro ao enviar e-mail: ' + error.message;
+                messageElement.style.color = 'red';
+            });
+        }
+    </script>
+</body>
+</html>
