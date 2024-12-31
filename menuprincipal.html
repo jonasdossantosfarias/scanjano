@@ -1,8 +1,3 @@
-<html><head><base href="." />
-I'll update the menu style to be more modern while keeping the rest of the code the same. I'll add modern icons using Bootstrap Icons and enhance the styling.
-
-Here's the complete code with updated menu styles:
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,7 +5,6 @@ Here's the complete code with updated menu styles:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Principal com Calendário</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -22,11 +16,12 @@ Here's the complete code with updated menu styles:
             height: 100vh;
         }
 
+        /* Perfil */
         #profile-container {
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
+            flex-direction: row; /* Alinha a foto e o nome em linha */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
             background-color: #1d72b8;
             padding: 20px;
             color: white;
@@ -39,23 +34,21 @@ Here's the complete code with updated menu styles:
             border-radius: 50%;
             border: 2px solid white;
             object-fit: cover;
-            margin-right: 15px;
+            margin-right: 15px; /* Espaço entre imagem e nome */
         }
 
         #profile-container span {
             font-size: 1.2em;
         }
 
-        /* Menu Moderno Atualizado */
+        /* Menu */
         #menu {
-            width: 100%;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            width: 100%; /* O menu ocupa toda a largura */
+            background-color: #ffffff;
             display: flex;
             justify-content: space-around;
             padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         #menu a {
@@ -63,58 +56,23 @@ Here's the complete code with updated menu styles:
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #455a64;
-            font-size: 0.9em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 8px 16px;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #menu a:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: #1d72b8;
-            transition: width 0.3s ease;
-        }
-
-        #menu a:hover:before {
-            width: 80%;
+            color: #1d72b8;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
         }
 
         #menu a:hover {
-            color: #1d72b8;
-            transform: translateY(-3px);
-            background: rgba(29, 114, 184, 0.05);
+            color: #155a8a;
+            transform: translateY(-5px);
         }
 
         #menu a.active {
-            color: #1d72b8;
-            background: rgba(29, 114, 184, 0.1);
+            color: #ff007f;
         }
 
         #menu a i {
             font-size: 1.8em;
             margin-bottom: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        #menu a:hover i {
-            transform: scale(1.1);
-        }
-
-        #menu a span {
-            font-weight: 500;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
         }
 
         /* Conteúdo Dinâmico */
@@ -124,13 +82,15 @@ Here's the complete code with updated menu styles:
             text-align: center;
         }
 
+        /* Iframe para o Calendário e Scan Estress */
         #iframe-container {
             width: 100%;
-            height: calc(100vh - 170px);
-            display: none;
+            height: calc(100vh - 170px); /* Altura calculada para preencher a tela menos o espaço necessário */
+            display: none; /* Inicialmente escondido */
             border: none;
         }
 
+        /* Responsividade */
         @media (max-width: 768px) {
             #profile-container img {
                 width: 60px;
@@ -141,49 +101,45 @@ Here's the complete code with updated menu styles:
                 font-size: 1em;
             }
 
-            #menu {
-                padding: 10px 0;
-            }
-
-            #menu a {
-                padding: 6px 12px;
-            }
-
             #menu a i {
-                font-size: 1.4em;
+                font-size: 1.5em;
             }
 
             #menu a span {
-                font-size: 0.75em;
+                font-size: 0.9em;
             }
 
             #iframe-container {
-                height: calc(100vh - 150px);
+                height: calc(100vh - 150px); /* Ajusta altura para telas menores */
             }
         }
     </style>
 
+    <!-- Incluindo Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- Inclua o firebase-config.js aqui -->
 </head>
 <body>
+    <!-- Container do perfil -->
     <div id="profile-container">
         <img id="profile-photo" src="https://via.placeholder.com/80" alt="Foto do perfil">
         <span id="profile-name">Carregando...</span>
     </div>
 
+    <!-- Menu de navegação logo abaixo do perfil -->
     <div id="menu">
         <a href="#" id="home-link" onclick="navigateTo('home')">
-            <i class="bi bi-house-heart-fill"></i>
+            <i class="bi bi-house-door-fill"></i>
             <span>Home</span>
         </a>
         <a href="#" id="search-link" onclick="navigateTo('search')">
-            <i class="bi bi-calendar-check-fill"></i>
+            <i class="bi bi-calendar-event"></i>
             <span>Calendário</span>
         </a>
         <a href="#" id="likes-link" onclick="navigateTo('likes')">
-            <i class="bi bi-activity"></i>
+            <i class="bi bi-heart-fill"></i>
             <span>Scan Estress</span>
         </a>
         <a href="#" id="notifications-link" onclick="navigateTo('notifications')">
@@ -191,19 +147,22 @@ Here's the complete code with updated menu styles:
             <span>Notificações</span>
         </a>
         <a href="#" id="profile-link" onclick="navigateTo('profile')">
-            <i class="bi bi-person-circle"></i>
+            <i class="bi bi-person-fill"></i>
             <span>Perfil</span>
         </a>
     </div>
 
+    <!-- Conteúdo dinâmico -->
     <div id="content">
         <h2>Bem-vindo!</h2>
         <p>Selecione uma opção no menu.</p>
     </div>
 
+    <!-- Iframe para carregar as páginas HTML -->
     <iframe id="iframe-container" src="" style="display: none;"></iframe>
 
     <script>
+        // Configuração do Firebase - Inclua apenas uma vez no projeto
         const firebaseConfig = {
             apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
             authDomain: "calhumorjano.firebaseapp.com",
@@ -214,20 +173,25 @@ Here's the complete code with updated menu styles:
             measurementId: "G-2GKTHK0RMP"
         };
 
+        // Inicializa o Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
 
+        // Verifica se o usuário está autenticado e exibe a foto/nome
         firebase.auth().onAuthStateChanged(function(user) {
             if (!user) {
+                // Se não estiver logado, redireciona para o login
                 window.location.href = 'login.html';
             } else {
+                // Se o usuário estiver logado, recupera a foto e o nome
                 firebase.firestore().collection("pacientes").doc(user.uid).get().then(function(doc) {
                     if (doc.exists) {
                         const userData = doc.data();
                         const userName = userData.Nome;
-                        const userPhoto = userData.foto_perfil || 'https://via.placeholder.com/80';
+                        const userPhoto = userData.foto_perfil || 'https://via.placeholder.com/80';  // Foto padrão se não houver
 
+                        // Atualiza o conteúdo da página com o nome e foto
                         document.getElementById("profile-name").innerText = userName;
                         document.getElementById("profile-photo").src = userPhoto;
                     } else {
@@ -239,277 +203,24 @@ Here's the complete code with updated menu styles:
             }
         });
 
+        // Função de navegação entre seções
         function navigateTo(section) {
+            // Oculta os conteúdos inicialmente
             document.getElementById('content').style.display = 'none'; 
             document.getElementById('iframe-container').style.display = 'none';
 
+            // Alterna entre as páginas com base na seção clicada
             if (section === 'search') {
-                document.getElementById('iframe-container').src = 'calhumor.html';
+                document.getElementById('iframe-container').src = 'calhumor.html'; // Exibe o calendário
                 document.getElementById('iframe-container').style.display = 'block';
             } else if (section === 'likes') {
-                document.getElementById('iframe-container').src = 'calstress.html';
+                document.getElementById('iframe-container').src = 'calstress.html'; // Exibe o calstress
                 document.getElementById('iframe-container').style.display = 'block';
             } else {
+                // Exibe o conteúdo padrão para outras seções
                 document.getElementById('content').style.display = 'block';
             }
         }
     </script>
 </body>
-</html></html><html><head><base href="." />
-I'll update the menu style to be more modern while keeping the rest of the code the same. I'll add modern icons using Bootstrap Icons and enhance the styling.
-
-Here's the complete code with updated menu styles:
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Principal com Calendário</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f4f8;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        #profile-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            background-color: #1d72b8;
-            padding: 20px;
-            color: white;
-            border-bottom: 4px solid #ffffff;
-        }
-
-        #profile-container img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid white;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-
-        #profile-container span {
-            font-size: 1.2em;
-        }
-
-        /* Menu Moderno Atualizado */
-        #menu {
-            width: 100%;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            z-index: 1000;
-        }
-
-        #menu a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #455a64;
-            font-size: 0.9em;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 8px 16px;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #menu a:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: #1d72b8;
-            transition: width 0.3s ease;
-        }
-
-        #menu a:hover:before {
-            width: 80%;
-        }
-
-        #menu a:hover {
-            color: #1d72b8;
-            transform: translateY(-3px);
-            background: rgba(29, 114, 184, 0.05);
-        }
-
-        #menu a.active {
-            color: #1d72b8;
-            background: rgba(29, 114, 184, 0.1);
-        }
-
-        #menu a i {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        #menu a:hover i {
-            transform: scale(1.1);
-        }
-
-        #menu a span {
-            font-weight: 500;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
-        }
-
-        /* Conteúdo Dinâmico */
-        #content {
-            flex-grow: 1;
-            padding: 20px;
-            text-align: center;
-        }
-
-        #iframe-container {
-            width: 100%;
-            height: calc(100vh - 170px);
-            display: none;
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            #profile-container img {
-                width: 60px;
-                height: 60px;
-            }
-
-            #profile-container span {
-                font-size: 1em;
-            }
-
-            #menu {
-                padding: 10px 0;
-            }
-
-            #menu a {
-                padding: 6px 12px;
-            }
-
-            #menu a i {
-                font-size: 1.4em;
-            }
-
-            #menu a span {
-                font-size: 0.75em;
-            }
-
-            #iframe-container {
-                height: calc(100vh - 150px);
-            }
-        }
-    </style>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-</head>
-<body>
-    <div id="profile-container">
-        <img id="profile-photo" src="https://via.placeholder.com/80" alt="Foto do perfil">
-        <span id="profile-name">Carregando...</span>
-    </div>
-
-    <div id="menu">
-        <a href="#" id="home-link" onclick="navigateTo('home')">
-            <i class="bi bi-house-heart-fill"></i>
-            <span>Home</span>
-        </a>
-        <a href="#" id="search-link" onclick="navigateTo('search')">
-            <i class="bi bi-calendar-check-fill"></i>
-            <span>Calendário</span>
-        </a>
-        <a href="#" id="likes-link" onclick="navigateTo('likes')">
-            <i class="bi bi-activity"></i>
-            <span>Scan Estress</span>
-        </a>
-        <a href="#" id="notifications-link" onclick="navigateTo('notifications')">
-            <i class="bi bi-bell-fill"></i>
-            <span>Notificações</span>
-        </a>
-        <a href="#" id="profile-link" onclick="navigateTo('profile')">
-            <i class="bi bi-person-circle"></i>
-            <span>Perfil</span>
-        </a>
-    </div>
-
-    <div id="content">
-        <h2>Bem-vindo!</h2>
-        <p>Selecione uma opção no menu.</p>
-    </div>
-
-    <iframe id="iframe-container" src="" style="display: none;"></iframe>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyB_KgO3n6BzWejWFwDJs0wwreS18QB_z40",
-            authDomain: "calhumorjano.firebaseapp.com",
-            projectId: "calhumorjano",
-            storageBucket: "calhumorjano.appspot.com",
-            messagingSenderId: "920817014794",
-            appId: "1:920817014794:web:cce90cfd082a022621e7f3",
-            measurementId: "G-2GKTHK0RMP"
-        };
-
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (!user) {
-                window.location.href = 'login.html';
-            } else {
-                firebase.firestore().collection("pacientes").doc(user.uid).get().then(function(doc) {
-                    if (doc.exists) {
-                        const userData = doc.data();
-                        const userName = userData.Nome;
-                        const userPhoto = userData.foto_perfil || 'https://via.placeholder.com/80';
-
-                        document.getElementById("profile-name").innerText = userName;
-                        document.getElementById("profile-photo").src = userPhoto;
-                    } else {
-                        console.log("Usuário não encontrado");
-                    }
-                }).catch(function(error) {
-                    console.log("Erro ao recuperar o nome e foto do usuário:", error);
-                });
-            }
-        });
-
-        function navigateTo(section) {
-            document.getElementById('content').style.display = 'none'; 
-            document.getElementById('iframe-container').style.display = 'none';
-
-            if (section === 'search') {
-                document.getElementById('iframe-container').src = 'calhumor.html';
-                document.getElementById('iframe-container').style.display = 'block';
-            } else if (section === 'likes') {
-                document.getElementById('iframe-container').src = 'calstress.html';
-                document.getElementById('iframe-container').style.display = 'block';
-            } else {
-                document.getElementById('content').style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html></html>
+</html>
