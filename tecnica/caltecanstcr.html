@@ -1,0 +1,190 @@
+<html><head><base href="." />
+<title>Técnica de Contagem Regressiva</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #155a8a;
+}
+
+.circle-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.circle-image i {
+    font-size: 60px;
+    color: #155a8a;
+}
+
+.main-description {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.1em;
+    color: #4b5563;
+}
+
+.steps {
+    margin: 30px 0;
+}
+
+.step {
+    margin: 20px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.step:before {
+    content: "•";
+    color: #155a8a;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.step-title {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.benefits {
+    margin-top: 30px;
+}
+
+.benefits-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.benefits-content {
+    font-style: italic;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica de Contagem Regressiva</h1>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            
+            <p class="main-description">
+                A técnica de contagem regressiva com respirações profundas é uma prática simples para reduzir o estresse e promover relaxamento:
+            </p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Passo 1:</div>
+                    <div class="step-content">Encontre um lugar calmo e confortável para se sentar ou deitar.</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Passo 2:</div>
+                    <div class="step-content">Comece a contar de 25 até 1 em voz baixa.</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Passo 3:</div>
+                    <div class="step-content">A cada número, faça uma respiração profunda e lenta de 4 seg. inspira 4 seg. segura e 4 seg. expira, e volta a contar.</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Passo 4:</div>
+                    <div class="step-content">Por exemplo, ao contar "5", respiração profunda e lenta de 4 seg. inspira 4 seg. segura e 4 seg. expira, conta "4".</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Passo 5:</div>
+                    <div class="step-content">Concentre-se na respiração, sentindo o ar entrar e sair, relaxando gradualmente o corpo.</div>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <div class="benefits-title">Benefícios:</div>
+                <div class="benefits-content">
+                    A prática da respiração 4x4x4, quando combinada com a contagem em voz alta, auxilia na ativação de áreas cerebrais relacionadas ao controle emocional. Ao realizar a contagem em voz alta durante cada fase da respiração, estimula-se o córtex pré-frontal, fortalecendo conexões neurais ligadas à regulação emocional. Isso complementa a ação fisiológica da técnica, ativando o sistema nervoso parassimpático e reduzindo a atividade do sistema nervoso simpático, resultando não apenas em uma melhor oxigenação do corpo, mas também em uma redução mais efetiva da ansiedade, promovendo uma sensação mais profunda de tranquilidade e equilíbrio emocional.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('.fade-in');
+        
+        elements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>
