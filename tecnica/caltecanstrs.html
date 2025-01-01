@@ -96,11 +96,40 @@ body {
 .benefits {
     margin-top: 30px;
     font-style: italic;
+    margin-bottom: 30px;
 }
 
 .benefits-title {
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.square-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.square-image:hover {
+    transform: translateX(-5px);
+}
+
+.square-image i {
+    font-size: 40px;
+    color: #155a8a;
 }
 
 @keyframes fadeIn {
@@ -177,6 +206,18 @@ body {
             <div class="benefits">
                 <div class="benefits-title">Benefícios:</div>
                 Essa técnica regula a respiração e estimula o nervo vago, que está relacionado à regulação emocional. Ao prolongar a exalação, ela ativa o sistema nervoso parassimpático, reduzindo a resposta do sistema nervoso simpático ao estresse. Isso resulta em uma diminuição da frequência cardíaca, pressão arterial e níveis de cortisol, promovendo relaxamento, redução da ansiedade e estabilidade emocional.
+            </div>
+
+            <div class="image-grid">
+                <div class="square-image">
+                    <i class="bi bi-lungs"></i>
+                </div>
+                <div class="square-image">
+                    <i class="bi bi-heart-pulse"></i>
+                </div>
+                <div class="square-image">
+                    <i class="bi bi-brightness-high"></i>
+                </div>
             </div>
         </div>
     </div>
