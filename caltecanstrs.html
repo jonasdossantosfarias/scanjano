@@ -66,11 +66,24 @@
             transform: scale(1.1);
         }
 
-        .circle-image img {
-            width: 100%;
-            height: 100%;
+        .circle-image i {
+            font-size: 80px;
+            color: #155a8a;
+        }
+
+        .expandable-image {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
             border-radius: 50%;
             object-fit: cover;
+            display: block;
+        }
+
+        .expandable-image:hover {
+            transform: scale(1.1);
         }
 
         .steps {
@@ -215,9 +228,7 @@
                     </div>
                 </div>
 
-                <div class="circle-image">
-                    <img src="imagens/tec/caltecanstrs4.gif" alt="Respiração 4x4x4">
-                </div>
+                <img src="imagens/tec/caltecanstrs4.gif" alt="Respiração 4x4x4" class="expandable-image">
             </div>
             
             <div class="benefits">
