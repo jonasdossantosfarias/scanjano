@@ -1,0 +1,263 @@
+<html><head><base href="." />
+<title>Clean Modern Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: #155a8a;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+.circle-image {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.circle-image i {
+    font-size: 60px;
+    color: #155a8a;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #155a8a;
+}
+
+.card-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .circle-image {
+        margin-bottom: 20px;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica Para Controle Financeiro</h1>
+            <p>Estratégias eficientes para gerenciar suas finanças</p>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-piggy-bank"></i>
+            </div>
+            <div class="card-content">
+                <h2>Roteiro Prático Para uma Aposentadoria Planejada</h2>
+                <p>Desenvolva um plano detalhado para sua aposentadoria, considerando fatores como expectativa de vida, inflação e estilo de vida desejado. Comece cedo, faça contribuições regulares e revise seu plano periodicamente para garantir que está no caminho certo.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cash-stack"></i>
+            </div>
+            <div class="card-content">
+                <h2>Redução de Dívidas de Alta Taxa de Juros</h2>
+                <p>Priorize o pagamento de dívidas com altas taxas de juros, utilizando métodos como a bola de neve da dívida ou avalanche da dívida. Negocie taxas menores quando possível e evite criar novas dívidas durante o processo de quitação.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-credit-card"></i>
+            </div>
+            <div class="card-content">
+                <h2>Uso Consciente de Cartão de Crédito e Empréstimos</h2>
+                <p>Utilize o cartão de crédito com responsabilidade, pagando o valor total da fatura mensalmente. Evite empréstimos desnecessários e, quando precisar, compare taxas e condições entre diferentes instituições financeiras.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-shield-lock"></i>
+            </div>
+            <div class="card-content">
+                <h2>Estabelecimento de um Fundo de Emergência</h2>
+                <p>Mantenha uma reserva financeira equivalente a 3-6 meses de despesas para imprevistos. Guarde este dinheiro em uma conta de fácil acesso e baixo risco, separada das suas contas principais.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <div class="card-content">
+                <h2>Monitoramento de Despesas em Tempo Real</h2>
+                <p>Utilize aplicativos e ferramentas digitais para acompanhar seus gastos diariamente. Categorize suas despesas e identifique padrões de gastos que podem ser otimizados.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-book"></i>
+            </div>
+            <div class="card-content">
+                <h2>Educação Financeira Contínua</h2>
+                <p>Invista em seu conhecimento financeiro através de cursos, livros e conteúdos especializados. Mantenha-se atualizado sobre o mercado financeiro e novas estratégias de investimento.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-diagram-3"></i>
+            </div>
+            <div class="card-content">
+                <h2>Diversificação de Investimento</h2>
+                <p>Distribua seus investimentos em diferentes classes de ativos para reduzir riscos. Considere uma combinação de renda fixa, variável, fundos imobiliários e outros investimentos alinhados com seu perfil de risco.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cash-coin"></i>
+            </div>
+            <div class="card-content">
+                <h2>Análise de Fluxo de Caixa</h2>
+                <p>Mantenha um registro detalhado de todas as entradas e saídas de dinheiro. Analise seu fluxo de caixa mensalmente para identificar oportunidades de economia e melhorar sua gestão financeira.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div class="card-content">
+                <h2>Automação de Finanças</h2>
+                <p>Configure pagamentos automáticos para contas recorrentes e transferências automáticas para investimentos. A automação ajuda a manter a disciplina financeira e evita atrasos em pagamentos.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-trophy"></i>
+            </div>
+            <div class="card-content">
+                <h2>Planejamento de Metas Financeiras S.M.A.R.T.</h2>
+                <p>Estabeleça metas específicas, mensuráveis, alcançáveis, relevantes e temporais. Revise e ajuste suas metas periodicamente para garantir que permaneçam realistas e motivadoras.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+            <div class="card-content">
+                <h2>Método de Pagamento por Antecipação</h2>
+                <p>Pague suas contas antecipadamente sempre que possível para aproveitar descontos e evitar juros. Mantenha um calendário financeiro organizado para não perder prazos importantes.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-calculator"></i>
+            </div>
+            <div class="card-content">
+                <h2>Orçamento Base Zero (OBZ)</h2>
+                <p>Justifique e planeje cada despesa do zero a cada período orçamentário. Este método ajuda a eliminar gastos desnecessários e maximizar a eficiência do seu orçamento.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>
