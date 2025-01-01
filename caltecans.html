@@ -1,0 +1,181 @@
+<html><head><base href="." />
+<title>tec. Ansiedade</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.technique-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Changed to make images circular */
+    margin-bottom: 20px;
+    object-fit: cover;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.technique-image:hover {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    color: #1f2937;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.card p {
+    color: #6b7280;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.button {
+    background: linear-gradient(45deg, #2563eb, #155a8a);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+            <div class="card fade-in">
+                <img src="../imagens/tec/caltecanssmg.jpg" alt="Técnica de Segurar Gelo" class="technique-image">
+                <h2>Técnica de Segurar Gelo na Mão</h2>
+                <p>Método para interromper pensamentos ansiosos através da sensação do gelo.</p>
+                <a href="caltecanssgm.html" class="button">Saiba Mais</a>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.2s;">
+                <img src="../imagens/tec/caltecanstds.jpg" alt="Técnica da Descrição" class="technique-image">
+                <h2>Técnica da Descrição de Sensações</h2>
+                <p>Observe e descreva detalhadamente as sensações do ambiente.</p>
+                <a href="caltecanstds.html" class="button">Saiba Mais</a>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.4s;">
+                <img src="../imagens/tec/caltecanstcr.jpg" alt="Técnica de Contagem" class="technique-image">
+                <h2>Técnica de Contagem Regressiva</h2>
+                <p>Conte regressivamente para acalmar a mente e focar no presente.</p>
+                <a href="caltecanstcr.html" class="button">Saiba Mais</a>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.6s;">
+                <img src="../imagens/tec/caltecanstdp.jpg" alt="Técnica de Diálogo" class="technique-image">
+                <h2>Técnica de Diálogo Positivo</h2>
+                <p>Pratique o diálogo interno positivo para reduzir a ansiedade.</p>
+                <a href="caltecanstdp.html" class="button">Saiba Mais</a>
+            </div>
+
+            <div class="card fade-in" style="animation-delay: 0.8s;">
+                <img src="../imagens/tec/caltecanstrs.jpg" alt="Técnica de Respiração" class="technique-image">
+                <h2>Técnica de Respiração 4X4X4</h2>
+                <p>Respire em ciclos de 4 segundos para acalmar corpo e mente.</p>
+                <a href="caltecanstrs.html" class="button">Saiba Mais</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseout', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

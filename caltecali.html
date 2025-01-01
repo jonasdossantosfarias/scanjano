@@ -1,0 +1,243 @@
+<html><head><base href="." />
+<title>Clean Modern Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: #155a8a;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+.circle-image {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.circle-image i {
+    font-size: 60px;
+    color: #155a8a;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #155a8a;
+}
+
+.card-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .circle-image {
+        margin-bottom: 20px;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Rotina Alimentar</h1>
+            <p>Dicas para uma alimentação saudável</p>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cup-straw"></i>
+            </div>
+            <div class="card-content">
+                <h2>Coma Porções Menores</h2>
+                <p>Opte por porções menores e mais frequentes ao longo do dia. Use pratos menores para controlar as porções e aprenda a reconhecer os sinais de saciedade do seu corpo. Comer devagar ajuda a perceber melhor quando está satisfeito.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cup"></i>
+            </div>
+            <div class="card-content">
+                <h2>Evite Refrigerantes e Álcool Durante as Refeições</h2>
+                <p>Bebidas açucaradas e alcoólicas interferem na absorção de nutrientes e adicionam calorias vazias à sua dieta. Prefira água ou bebidas naturais sem açúcar para acompanhar suas refeições.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cart3"></i>
+            </div>
+            <div class="card-content">
+                <h2>Prepare Sua Própria Comida</h2>
+                <p>Cozinhar suas próprias refeições permite controlar os ingredientes e métodos de preparo. Você pode escolher opções mais saudáveis e adequadas às suas necessidades nutricionais.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-bicycle"></i>
+            </div>
+            <div class="card-content">
+                <h2>Pratique Exercícios Físicos</h2>
+                <p>Combine uma alimentação equilibrada com atividade física regular para melhores resultados. O exercício ajuda a manter um peso saudável e melhora o metabolismo.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-person-workspace"></i>
+            </div>
+            <div class="card-content">
+                <h2>Consulte um Nutricionista</h2>
+                <p>Busque orientação profissional para criar um plano alimentar personalizado. Um nutricionista pode ajudar a estabelecer metas realistas e adaptar a dieta às suas necessidades específicas.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-heart-pulse"></i>
+            </div>
+            <div class="card-content">
+                <h2>Vivencie a Experiência Alimentar</h2>
+                <p>Preste atenção ao momento da refeição, aprecie os sabores e texturas. Pratique a alimentação consciente, evitando distrações como TV ou celular durante as refeições.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-emoji-smile"></i>
+            </div>
+            <div class="card-content">
+                <h2>Evite Comer Por Emoções</h2>
+                <p>Identifique e evite padrões de alimentação emocional. Busque outras formas de lidar com o estresse e as emoções que não envolvam comida.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-clock"></i>
+            </div>
+            <div class="card-content">
+                <h2>Alimentação a Cada 4 a 6 Horas</h2>
+                <p>Mantenha um intervalo regular entre as refeições para estabilizar o açúcar no sangue. Evite ficar muito tempo sem comer para não sobrecarregar o organismo nas próximas refeições.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-cup-hot"></i>
+            </div>
+            <div class="card-content">
+                <h2>Mastigue Bem</h2>
+                <p>Dedique tempo para mastigar adequadamente cada bocado. A mastigação adequada melhora a digestão e aumenta a absorção de nutrientes.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <div class="card-content">
+                <h2>Coloque um Horário</h2>
+                <p>Estabeleça horários regulares para suas refeições. A regularidade nos horários das refeições ajuda a regular o metabolismo e os ciclos naturais do corpo.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<html><head><base href="." />
+<title>Breathing Technique 4x4x4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #155a8a;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.circle-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.circle-image:hover {
+    transform: scale(1.1);
+}
+
+.circle-image i {
+    font-size: 80px;
+    color: #155a8a;
+}
+
+.steps {
+    margin: 20px 0;
+}
+
+.step {
+    display: flex;
+    align-items: baseline;
+    margin: 15px 0;
+}
+
+.step-marker {
+    width: 10px;
+    height: 10px;
+    background-color: #155a8a;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.benefits {
+    margin-top: 30px;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.benefits-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.square-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.square-image:hover {
+    transform: translateX(-5px);
+}
+
+.square-image i {
+    font-size: 40px;
+    color: #155a8a;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica de Respiração 4x4x4</h1>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-wind"></i>
+            </div>
+            
+            <p>A técnica de respiração 4x4x4 é uma prática simples para reduzir a ansiedade:</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-marker"></div>
+                    <div>
+                        <span class="step-text">Passo 1:</span> 
+                        Encontre um lugar tranquilo e sente-se ou deitado confortavelmente, coloque uma mão no peito e outra na barriga.
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-marker"></div>
+                    <div>
+                        <span class="step-text">Passo 2:</span> 
+                        Inspire profundamente pelo nariz contando até 4 segundos.
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-marker"></div>
+                    <div>
+                        <span class="step-text">Passo 3:</span> 
+                        Mantenha a respiração por mais 4 segundos, retendo o ar.
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-marker"></div>
+                    <div>
+                        <span class="step-text">Passo 4:</span> 
+                        Expire lentamente pela boca também durante 4 segundos.
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-marker"></div>
+                    <div>
+                        <span class="step-text">Passo 5:</span> 
+                        Se preferir Use a Imagem a seguir:
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefits">
+                <div class="benefits-title">Benefícios:</div>
+                Essa técnica regula a respiração e estimula o nervo vago, que está relacionado à regulação emocional. Ao prolongar a exalação, ela ativa o sistema nervoso parassimpático, reduzindo a resposta do sistema nervoso simpático ao estresse. Isso resulta em uma diminuição da frequência cardíaca, pressão arterial e níveis de cortisol, promovendo relaxamento, redução da ansiedade e estabilidade emocional.
+            </div>
+
+            <div class="image-grid">
+                <div class="square-image">
+                    <i class="bi bi-lungs"></i>
+                </div>
+                <div class="square-image">
+                    <i class="bi bi-heart-pulse"></i>
+                </div>
+                <div class="square-image">
+                    <i class="bi bi-brightness-high"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>

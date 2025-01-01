@@ -1,0 +1,212 @@
+<html><head><base href="." />
+<title>Clean Modern Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: #155a8a;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.circle-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.circle-image i {
+    font-size: 60px;
+    color: #155a8a;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #155a8a;
+}
+
+.steps-list {
+    list-style-type: none;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.steps-list li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.steps-list li:before {
+    content: "•";
+    color: #155a8a;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: -2px;
+}
+
+.steps-list strong {
+    text-decoration: underline;
+}
+
+.benefits {
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.benefits strong {
+    font-style: normal;
+}
+
+.card-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.square-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square-image i {
+    font-size: 40px;
+    color: #155a8a;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica de Diálogo Positivo</h1>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-chat-heart"></i>
+            </div>
+            <div class="card-content">
+                <p>A técnica do diálogo positivo envolve uma conversa interna encorajadora e racionalização para reduzir a ansiedade:</p>
+                
+                <ul class="steps-list">
+                    <li><strong>Passo 1:</strong> Encontre um lugar tranquilo e confortável.</li>
+                    <li><strong>Passo 2:</strong> Fale em voz alta, encorajando-se e lembrando suas qualidades.</li>
+                    <li><strong>Passo 3:</strong> Racionalize sobre a ansiedade, dizendo que é passageira.</li>
+                    <li><strong>Passo 4:</strong> Reforce a ideia de que você tem recursos para lidar com a situação.</li>
+                </ul>
+
+                <p class="benefits">
+                    <strong>Benefícios:</strong> A prática do diálogo positivo ativa regiões do cérebro associadas à autoconfiança, como o córtex pré-frontal, fortalecendo conexões neurais relacionadas à resiliência emocional. Essa atividade influencia o sistema límbico, diminuindo a ativação de áreas responsáveis pela ansiedade, como a amígdala, e aumentando a produção de neurotransmissores associados ao bem-estar, como a serotonina, reduzindo os sintomas ansiosos.
+                </p>
+
+                <div class="image-grid">
+                    <div class="square-image">
+                        <i class="bi bi-brain"></i>
+                    </div>
+                    <div class="square-image">
+                        <i class="bi bi-heart-pulse"></i>
+                    </div>
+                    <div class="square-image">
+                        <i class="bi bi-emoji-smile"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>

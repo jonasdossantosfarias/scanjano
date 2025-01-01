@@ -1,0 +1,233 @@
+<html><head><base href="." />
+<title>Clean Modern Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9fafb;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: #155a8a;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 1.1em;
+}
+
+.circle-image {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.circle-image i {
+    font-size: 60px;
+    color: #155a8a;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #155a8a;
+}
+
+.card-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .circle-image {
+        margin-bottom: 20px;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header fade-in">
+            <h1>Técnica Para Procrastinação</h1>
+            <p>Técnicas para vencer a procrastinação</p>
+        </header>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-calendar-check"></i>
+            </div>
+            <div class="card-content">
+                <h2>Estabeleça um Cronograma</h2>
+                <p>Organize seu tempo com um planejamento diário estruturado e realista. Defina horários específicos para cada tarefa, incluindo momentos de pausa e lazer. Um cronograma bem estruturado ajuda a manter o foco e evitar a procrastinação, pois você sempre sabe qual é a próxima atividade a ser realizada.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-person-heart"></i>
+            </div>
+            <div class="card-content">
+                <h2>Pratique a Autoreflexão</h2>
+                <p>Entenda os motivos que te levam a procrastinar para desenvolver estratégias efetivas. Mantenha um diário de atividades, identifique padrões de comportamento e reconheça suas limitações. A autorreflexão consciente permite desenvolver métodos personalizados para superar a procrastinação.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-trophy"></i>
+            </div>
+            <div class="card-content">
+                <h2>Recompense-se</h2>
+                <p>Celebre as pequenas vitórias e estabeleça recompensas por cumprir suas metas. Criar um sistema de recompensas ajuda a manter a motivação e torna o processo de realizar tarefas mais prazeroso. Lembre-se de que cada passo concluído é uma conquista importante.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="card-content">
+                <h2>Pratique o Autocontrole</h2>
+                <p>Desenvolva disciplina e resistência a distrações durante suas atividades. Elimine tentações do seu ambiente de trabalho, como redes sociais e notificações. O autocontrole é uma habilidade que pode ser desenvolvida com prática constante e dedicação.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-house-heart"></i>
+            </div>
+            <div class="card-content">
+                <h2>Crie um Ambiente Propício</h2>
+                <p>Organize seu espaço de trabalho para maximizar o foco e a produtividade. Um ambiente limpo, organizado e livre de distrações ajuda a manter o foco nas tarefas. Considere fatores como iluminação, temperatura e ruídos para criar um espaço ideal.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-list-check"></i>
+            </div>
+            <div class="card-content">
+                <h2>Priorize as Tarefas</h2>
+                <p>Identifique e foque nas atividades mais importantes e urgentes primeiro. Use métodos como a Matriz de Eisenhower para classificar suas tarefas por prioridade e urgência. Começar pelas tarefas mais importantes garante que o essencial seja sempre realizado.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <div class="card-content">
+                <h2>Use a Técnica Pomodoro</h2>
+                <p>Trabalhe em intervalos focados de 25 minutos com pequenas pausas. Esta técnica ajuda a manter o foco por períodos determinados e evita a fadiga mental. As pausas regulares são essenciais para manter a produtividade ao longo do dia.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-bullseye"></i>
+            </div>
+            <div class="card-content">
+                <h2>Estabeleça Metas Claras</h2>
+                <p>Defina objetivos específicos, mensuráveis e alcançáveis. Metas bem definidas fornecem direção clara e motivação para realizar as tarefas. Quebre metas grandes em objetivos menores para torná-las mais gerenciáveis.</p>
+            </div>
+        </div>
+
+        <div class="card fade-in">
+            <div class="circle-image">
+                <i class="bi bi-diagram-2"></i>
+            </div>
+            <div class="card-content">
+                <h2>Divida as Tarefas</h2>
+                <p>Quebre grandes projetos em pequenas tarefas mais gerenciáveis. Trabalhar com pequenas partes torna o processo menos intimidante e mais fácil de começar. Cada pequena tarefa concluída gera momentum para continuar avançando.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+    </script>
+</body>
+</html>
